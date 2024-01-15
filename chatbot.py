@@ -1,7 +1,6 @@
 import nltk
 from nltk.chat.util import Chat, reflections
 
-# Define the chatbot's responses
 pairs = [
     [
         r"my name is (.*)",
@@ -17,11 +16,11 @@ pairs = [
     ],
     [
         r"how are you ?",
-        # ["I'm doing good. How about you?"]
-    # ],
+        ["I'm doing good. How about you?"]
+    ],
     [
-        r"Tell me a joke",
-        [" Sure! Why don't scientists trust atoms? Because they make up everything!"]
+        r"tell me a joke",
+        ["Sure! Why don't scientists trust atoms? Because they make up everything!"]
     ],
     [
         r"i am fine",
@@ -32,20 +31,22 @@ pairs = [
         ["No problem"]
     ],
     [
-        r"quit",
+        r"bye",
         ["Bye! Take care."]
     ],
-]]
+]
 
-# Create a chatbot
 def chatbot():
     print("Hi! I am a chatbot. You can ask me anything.")
-
-    # Create a chat instance
     chat = Chat(pairs, reflections)
 
-    # Start chatting
-    chat.converse()
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == 'quit':
+            print("Bye! Take care.")
+            break
+        response = chat.respond(user_input)
+        print("Chatbot:", response)
 
 if __name__ == "__main__":
     nltk.download('punkt')
